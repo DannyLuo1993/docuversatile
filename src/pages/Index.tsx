@@ -4,8 +4,9 @@ import { FileUpload } from '@/components/FileUpload';
 import { TranslationProgress } from '@/components/TranslationProgress';
 import { SpecialWords } from '@/components/SpecialWords';
 import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
+import { Download, Settings } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -48,11 +49,18 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="container max-w-4xl mx-auto py-12 px-4 space-y-12">
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight">Document Translator</h1>
-          <p className="text-muted-foreground">
-            Upload your document and get it translated instantly
-          </p>
+        <div className="flex justify-between items-center">
+          <div className="text-center space-y-4">
+            <h1 className="text-4xl font-bold tracking-tight">Document Translator</h1>
+            <p className="text-muted-foreground">
+              Upload your document and get it translated instantly
+            </p>
+          </div>
+          <Link to="/settings">
+            <Button variant="ghost" size="icon">
+              <Settings className="h-5 w-5" />
+            </Button>
+          </Link>
         </div>
 
         <div className="space-y-8">
