@@ -45,9 +45,22 @@ const Index = () => {
     }, 500);
   };
 
-  const downloadTranslation = (format: 'pdf' | 'word') => {
-    // Create a mock download response
-    const mockResponse = new Blob(['Translated content'], { type: format === 'pdf' ? 'application/pdf' : 'application/msword' });
+  const downloadTranslation = (format: 'pdf' | 'docx') => {
+    // This is a mock implementation. In a real application, you would:
+    // 1. Send the original file to a translation service/AI model
+    // 2. Receive the translated content
+    // 3. Convert the translated content to the requested format (PDF/DOCX)
+    // 4. Create a downloadable file with the actual translated content
+    
+    const mimeTypes = {
+      'pdf': 'application/pdf',
+      'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    };
+
+    const mockResponse = new Blob(['This is a mock translated content. In a real application, this would be the actual translated text.'], 
+      { type: mimeTypes[format] }
+    );
+    
     const url = URL.createObjectURL(mockResponse);
     const a = document.createElement('a');
     a.href = url;
@@ -112,9 +125,9 @@ const Index = () => {
                     <File className="w-4 h-4" />
                     Download as PDF
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => downloadTranslation('word')} className="gap-2">
+                  <DropdownMenuItem onClick={() => downloadTranslation('docx')} className="gap-2">
                     <FileText className="w-4 h-4" />
-                    Download as Word
+                    Download as DOCX
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
