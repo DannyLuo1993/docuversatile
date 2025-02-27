@@ -4,9 +4,15 @@ import { FileUpload } from '@/components/FileUpload';
 import { TranslationProgress } from '@/components/TranslationProgress';
 import { SpecialWords } from '@/components/SpecialWords';
 import { Button } from '@/components/ui/button';
-import { Download, Settings } from 'lucide-react';
+import { Download, Settings, FilePdf, FileText } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import { Link } from 'react-router-dom';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Index = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -39,10 +45,10 @@ const Index = () => {
     }, 500);
   };
 
-  const downloadTranslation = () => {
+  const downloadTranslation = (format: 'pdf' | 'word') => {
     toast({
       title: "Download started",
-      description: "Your translated document will be downloaded shortly.",
+      description: `Your translated document will be downloaded as ${format.toUpperCase()}`,
     });
   };
 
@@ -83,10 +89,24 @@ const Index = () => {
 
           {progress === 100 && (
             <div className="flex justify-center animate-fade-in">
-              <Button onClick={downloadTranslation} className="gap-2">
-                <Download className="w-4 h-4" />
-                Download Translation
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className="gap-2">
+                    <Download className="w-4 h-4" />
+                    Download Translation
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => downloadTranslation('pdf')} className="gap-2">
+                    <FilePdf className="w-4 h-4" />
+                    Download as PDF
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => downloadTranslation('word')} className="gap-2">
+                    <FileText className="w-4 h-4" />
+                    Download as Word
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           )}
 
