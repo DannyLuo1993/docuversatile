@@ -4,7 +4,7 @@ import { FileUpload } from '@/components/FileUpload';
 import { TranslationProgress } from '@/components/TranslationProgress';
 import { SpecialWords } from '@/components/SpecialWords';
 import { Button } from '@/components/ui/button';
-import { Download, Settings, FilePdf, FileText } from 'lucide-react';
+import { Download, Settings, FileText, File } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import { Link } from 'react-router-dom';
 import {
@@ -98,7 +98,7 @@ const Index = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={() => downloadTranslation('pdf')} className="gap-2">
-                    <FilePdf className="w-4 h-4" />
+                    <File className="w-4 h-4" />
                     Download as PDF
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => downloadTranslation('word')} className="gap-2">
