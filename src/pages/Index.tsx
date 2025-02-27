@@ -46,6 +46,17 @@ const Index = () => {
   };
 
   const downloadTranslation = (format: 'pdf' | 'word') => {
+    // Create a mock download response
+    const mockResponse = new Blob(['Translated content'], { type: format === 'pdf' ? 'application/pdf' : 'application/msword' });
+    const url = URL.createObjectURL(mockResponse);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `translated-document.${format}`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
     toast({
       title: "Download started",
       description: `Your translated document will be downloaded as ${format.toUpperCase()}`,
@@ -96,7 +107,7 @@ const Index = () => {
                     Download Translation
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent className="bg-background border shadow-lg z-50">
                   <DropdownMenuItem onClick={() => downloadTranslation('pdf')} className="gap-2">
                     <File className="w-4 h-4" />
                     Download as PDF
